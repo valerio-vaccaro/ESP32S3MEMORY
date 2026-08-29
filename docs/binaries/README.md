@@ -66,6 +66,16 @@ Each artifact includes the files needed by a flasher:
 - `0xE000_boot_app0.bin`
 - `0x10000_firmware.bin`
 - `SHA256SUMS.txt`
+- `flash_firmware.sh`
+
+After extracting an artifact, install `esptool`, put the ESP32-S2 board in bootloader mode, and flash it with:
+
+```bash
+python3 -m pip install esptool
+./flash_firmware.sh --port /dev/ttyACM0
+```
+
+Use the serial device reported by your system instead of `/dev/ttyACM0` (for example, `/dev/ttyUSB0` on Linux or `COM3` on Windows). The script verifies the artifact checksums before writing the bootloader, partitions, boot app, and firmware.
 
 ## Verification
 

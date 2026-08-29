@@ -75,6 +75,8 @@ jobs:
           cp "$build_dir/bootloader.bin" "$artifact_dir/0x1000_bootloader.bin"
           cp "$build_dir/partitions.bin" "$artifact_dir/0x8000_partitions.bin"
           cp "$boot_app" "$artifact_dir/0xE000_boot_app0.bin"
+          cp scripts/flash_downloaded_firmware.sh "$artifact_dir/flash_firmware.sh"
+          chmod +x "$artifact_dir/flash_firmware.sh"
           sha256sum "$artifact_dir"/*.bin > "$artifact_dir/SHA256SUMS.txt"
           printf '%s\n' \
             "BitFloppy firmware for $ENVIRONMENT" \
@@ -84,6 +86,9 @@ jobs:
             "  0x8000_partitions.bin" \
             "  0xE000_boot_app0.bin" \
             "  0x10000_firmware.bin" \
+            "" \
+            "Flash a connected board after extracting the artifact:" \
+            "  ./flash_firmware.sh --port /dev/ttyACM0" \
             > "$artifact_dir/README.txt"
       - name: Upload ${{ matrix.environment }} firmware
         id: upload-firmware
@@ -101,5 +106,5 @@ jobs:
             echo
             echo "[Download this firmware artifact](${{ steps.upload-firmware.outputs.artifact-url }})"
             echo
-            echo "Includes the bootloader, partition table, boot app, application firmware, and SHA-256 checksums."
+            echo "Includes the bootloader, partition table, boot app, application firmware, SHA-256 checksums, and a local Bash flashing script."
           } >> "$GITHUB_STEP_SUMMARY"
