@@ -28,17 +28,25 @@ Install BitFloppy firmware with the method that best fits your setup.
 
 ## 🚀 Quick Start
 
-### Method 1: Interactive Shell Script (Recommended)
+### Method 1: DIYFlasher (Web)
+
+Use [DIYFlasher](https://valerio-vaccaro.github.io/diyflasher/) to flash BitFloppy directly from a supported desktop browser. Connect the board with a USB data cable, put it in bootloader mode, then choose the BitFloppy board and firmware version in DIYFlasher.
+
+<p><a class="pixel-button" href="https://valerio-vaccaro.github.io/diyflasher/" target="_blank" rel="noopener noreferrer">OPEN DIYFLASHER ↗</a></p>
+
+Each downloaded firmware artifact also includes `flash_firmware.sh`, a local script that verifies the artifact checksums and flashes the board from the command line.
+
+### Method 2: Interactive Shell Script
 ```bash
 ./flash_board.sh
 ```
 
-### Method 2: Python Script
+### Method 3: Python Script
 ```bash
 python3 flash_board.py
 ```
 
-### Method 3: PlatformIO Integration
+### Method 4: PlatformIO Integration
 ```bash
 python3 flash_pio.py
 ```
